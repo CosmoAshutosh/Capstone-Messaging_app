@@ -1,0 +1,51 @@
+*{
+     margin: 0;
+     padding: 0;
+}
+
+body{
+     color: white;
+}
+
+.main-container{
+     background-color: burlywood;
+     height: 100vh;
+     display: grid;
+     grid-template-columns: 40% 60%;
+}
+
+.message-box{
+     border: 5px solid black;
+     border-radius: 10px;
+     margin: 10px;
+     margin-left: 0;
+     grid-area: 1 / 2 / span 2;
+     display: grid;
+     grid-template-rows: 7% 85% 8%;
+}
+
+.chatProfile{
+     background-color: aqua;
+}
+
+.chatbox{
+     background-color: blue;
+}
+
+.textarea{
+     background-color: aquamarine;
+}
+
+.seenmessage-box{
+     border: 5px solid green;
+     border-radius: 10px;
+     margin: 10px;
+     margin-right: 0;
+}
+
+.unseenmessage-box{
+     border: 5px solid red;
+     border-radius: 10px;
+     margin: 10px;
+     margin-right: 0;
+}
