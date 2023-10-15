@@ -4,13 +4,25 @@ function MessageArea(){
      return (
           <div className="message-box">
                <div className="chatProfile">
-                    I am chat profile
+                    <div>
+                         hello1
+                    </div>
+                    <div>
+                         hello2
+                    </div>
+                    <div>
+                         hello3
+                    </div>
                </div>
                <div className="chatbox">
                     i am chat box
                </div>
                <div className="textarea">
-                    i am text area
+                    <div className="emoji" >
+                         
+                    </div>
+                    <input className="textbox" type="text"></input>
+                    
                </div>
           </div>
      )
