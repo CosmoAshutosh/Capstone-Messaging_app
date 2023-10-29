@@ -1,0 +1,49 @@
+*{
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: "Roboto";
+}
+
+body{
+     margin: 0;
+}
+
+.welcome-container{
+     display: flex;
+     height: 790px;
+     width: 100%;
+     background-image: url("https://images.unsplash.com/photo-1526554850534-7c78330d5f90?auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&w=1769");
+     background-repeat: no-repeat;
+     background-size: cover;
+     image-rendering: high-quality;
+}
+
+.loginIcon{
+     padding-top: 50px;
+     width: 100%;
+     text-align: center;
+}
+
+.loginIcon > img {
+     width: 100px;
+     height: 100px;
+     border-radius: 35px;
+}
+
+.loginOptions{
+     margin: auto;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     gap: 20px;
+
+}
+
+
+/* css for chatting container */
+
+.maincontainer{
+     
+}
