@@ -1,5 +1,6 @@
 import React from "react";
-import Chattingpage from "./chattingpage";
+import Chattingpage from "./chattingpageassets/chattingpage";
+// import Welcome from "./welcome";
 
 function App() {
      return(
