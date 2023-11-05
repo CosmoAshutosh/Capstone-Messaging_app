@@ -11,7 +11,7 @@ function Sidebar(props) {
 
                <Grid item xs={4} sx={{ height: '100vh', padding: '0' }}>
 
-                    <div className="profile" style={{ backgroundColor: '#F0EEF0', padding: '10px' }}>
+                    <div className="profile">
                          <AppBar position="static" sx={{ gap: '20px', backgroundColor: "transparent", boxShadow: 'none', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                               <Tooltip title="User">
                                    <Avatar src="/broken-image.jpg" />
@@ -22,12 +22,12 @@ function Sidebar(props) {
                          </AppBar>
                     </div>
 
-                    <div className="usersearch roomsearch" style={{ backgroundColor: '#F9F8FB', padding: '10px' }}>
+                    <div className="usersearch roomsearch">
                          <Searchbar />
 
                     </div>
 
-                    <div className="user-room" style={{ backgroundColor: '#F0EEF0' }}>
+                    <div className="user-room">
                          <Tabs sx={{ width: '100%' }}>
                               <Tooltip title="Home">
                                    <Tab icon={<HomeIcon />} sx={{ width: '164.66px' }} />

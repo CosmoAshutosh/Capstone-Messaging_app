@@ -44,6 +44,21 @@ body{
 
 /* css for chatting container */
 
-.maincontainer{
-     
+.profile{
+     background-color: '#F0EEF0';
+     padding: '10px';
+}
+
+.usersearch{
+     background-color: '#F9F8FB';
+     padding: '10px';
+}
+
+.user-room{
+     background-color: '#F0EEF0';
+}
+
+.chatting-profile{
+     background-color: 'wheat';
+     padding: '10px';
 }

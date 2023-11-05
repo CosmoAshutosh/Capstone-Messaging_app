@@ -9,11 +9,12 @@ function Chattingpage(props) {
      return (
           <Grid container>
 
+               {/* sidebar in main profile */}
                <Sidebar users={props.user} />
 
                <Grid item xs={8} sx={{ height: '100vh', padding: '0' }}>
 
-                    <div className="chating-profile" style={{ backgroundColor: 'wheat', padding: '10px' }}>
+                    <div className="chating-profile">
                          <AppBar position="static" sx={{ gap: '20px', backgroundColor: "transparent", boxShadow: 'none', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                               <Avatar src="/broken-image.jpg" />
                               <Typography variant="h6" component="div" sx={{ color: 'black' }}>
