@@ -1,12 +1,16 @@
 import React from "react";
-// import Chattingpage from "./chattingpageassets/chattingpage";
+import Chattingpage from "./chattingpageassets/chattingpage";
 import Welcome from "./welcome";
+import useAuthUser from "./hooks/useAuthuser";
 
 function App() {
-     return(
-          <div>
-               <Welcome />
-          </div>
+
+     const user = useAuthUser();
+
+     if (!user) return <Welcome />
+
+     return (
+          <Chattingpage user={user} />
      )
 }
 
