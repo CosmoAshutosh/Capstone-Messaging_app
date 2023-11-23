@@ -1,7 +1,7 @@
 import React from "react";
-import Chattingpage from "./chattingpageassets/chattingpage";
 import Welcome from "./welcome";
 import useAuthUser from "./hooks/useAuthuser";
+import Sidebar from "./chattingpageassets/Sidebar";
 
 function App() {
 
@@ -10,7 +10,11 @@ function App() {
      if (!user) return <Welcome />
 
      return (
-          <Chattingpage user={user} />
+          <div className="app">
+               <div className="app__body">
+                    <Sidebar user = {user}/>
+               </div>
+          </div>
      )
 }
 

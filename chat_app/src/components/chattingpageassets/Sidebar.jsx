@@ -1,51 +1,113 @@
-import React from "react";
-import Searchbar from "./Searchbar";
-import { Grid, AppBar, Avatar, Tab, Tabs, Tooltip, Typography } from "@mui/material";
-import HomeIcon from '@mui/icons-material/Home';
-import GroupsIcon from '@mui/icons-material/Groups';
-import PersonIcon from '@mui/icons-material/Person';
+import { Avatar, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, TextField, Tooltip } from "@mui/material";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import AddIcon from '@mui/icons-material/Add';
+import React, { useState } from "react";
+import SidebarTabs from "./SidebarTabs";
+import SidebarList from "./SidebarList";
 
-function Sidebar(props) {
+const tabs = [{
+     id: 1,
+     icon: <Home />,
+},
+{
+     id: 2,
+     icon: <Message />,
+},
+{
+     id: 3,
+     icon: <PeopleAlt />,
+},
+];
+
+function Sidebar(user) {
+
+     const [menu, setMenu] = useState(1)
+     const data = [{
+          id: 1,
+          name: "Cecil Ekka",
+          photoURL: "none"
+     }]
+
      return (
-          <Grid container>
-
-               <Grid item xs={4} sx={{ height: '100vh', padding: '0' }}>
-
-                    <div className="profile">
-                         <AppBar position="static" sx={{ gap: '20px', backgroundColor: "transparent", boxShadow: 'none', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                              <Tooltip title="User">
-                                   <Avatar src="/broken-image.jpg" />
-                              </Tooltip>
-                              <Typography variant="h6" component="div" sx={{ color: 'black' }}>
-                                   Ashutosh Mishra
-                              </Typography>
-                         </AppBar>
+          <div className="sidebar">
+               <div className="sidebar__header">
+                    <div className="sidebar__header--left">
+                         <Tooltip title="User">
+                              <Avatar src={user.photoURL} alt={user.displayName} />
+                              <h4>{user.displayName}</h4>
+                         </Tooltip>
                     </div>
-
-                    <div className="usersearch roomsearch">
-                         <Searchbar />
-
+                    <div className="sidebar__header--right">
+                         <IconButton>
+                              <ExitToAppIcon />
+                         </IconButton>
                     </div>
+               </div>
+               <div className="sidebar__search">
+                    <form className="sidebar__search-container">
+                         <input
+                              type="text"
+                              id="search"
+                              placeholder="Seaarch for user or rooms"
+                         />
+                    </form>
+               </div>
 
-                    <div className="user-room">
-                         <Tabs sx={{ width: '100%' }}>
-                              <Tooltip title="Home">
-                                   <Tab icon={<HomeIcon />} sx={{ width: '164.66px' }} />
-                              </Tooltip>
-                              <Tooltip title="Public Room">
-                                   <Tab icon={<GroupsIcon />} sx={{ width: '164.66px' }} />
-                              </Tooltip>
-                              <Tooltip title="Personal chat">
-                                   <Tab icon={<PersonIcon />} sx={{ width: '164.66px' }} />
-                              </Tooltip>
-                         </Tabs>
+               <div className="sidebar__menu">
+                    {tabs.map(tab => (
+                         <SidebarTabs key={tab.id} onClick={() => setMenu(tab.id)} isActive={tab.id === menu}>
+                              <div className="sidebar__menu--home">
+                                   {tab.icon}
+                                   <div className="sidebarr__menu--line">
 
-                    </div>
+                                   </div>
+                              </div>
+                         </SidebarTabs>
+                    ))}
 
-               </Grid>
+               </div>
 
-          </Grid>
-     );
+               {menu === 1 ? (
+                    <SidebarList title="Chats" data={data} />
+               ) : menu === 2 ? (
+                    <SidebarList title="Rooms" data={data} />
+               ) : menu === 3 ? (
+                    <SidebarList title="Users" data={data} />
+               ) : menu === 4 ? (
+                    <SidebarList title="Search Result" data={data} />
+               ) : null
+               }
+
+               <div className="sidebar__chat--addRooms">
+                    <IconButton>
+                         <AddIcon />
+                    </IconButton>
+               </div>
+
+               <Dialog open={open} onClose={handleClose}>
+                    <DialogTitle>Subscribe</DialogTitle>
+                    <DialogContent>
+                         <DialogContentText>
+                              To subscribe to this website, please enter your email address here. We
+                              will send updates occasionally.
+                         </DialogContentText>
+                         <TextField
+                              autoFocus
+                              margin="dense"
+                              id="name"
+                              label="Email Address"
+                              type="email"
+                              fullWidth
+                              variant="standard"
+                         />
+                    </DialogContent>
+                    <DialogActions>
+                         <Button onClick={handleClose}>Cancel</Button>
+                         <Button onClick={handleClose}>Subscribe</Button>
+                    </DialogActions>
+               </Dialog>
+          </div>
+     )
 }
 
 export default Sidebar;
