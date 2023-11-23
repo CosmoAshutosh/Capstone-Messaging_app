@@ -1,9 +1,14 @@
-import { Avatar, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, TextField, Tooltip } from "@mui/material";
+import { Avatar, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, TextField } from "@mui/material";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import AddIcon from '@mui/icons-material/Add';
 import React, { useState } from "react";
 import SidebarTabs from "./SidebarTabs";
 import SidebarList from "./SidebarList";
+import Home from "./Home";
+import Message from "./Message";
+import PeopleAlt from "./PeopleAlt";
+
+
 
 const tabs = [{
      id: 1,
@@ -19,23 +24,27 @@ const tabs = [{
 },
 ];
 
-function Sidebar(user) {
+function Sidebar({users}) {
 
      const [menu, setMenu] = useState(1)
+     const [isCreatingRoom, setCreatingRoom] = useState(false)
+     const [roomName, setroomName] = useState('')
      const data = [{
           id: 1,
           name: "Cecil Ekka",
           photoURL: "none"
      }]
 
+     async function createRoom() {
+          
+     }
+
      return (
           <div className="sidebar">
                <div className="sidebar__header">
                     <div className="sidebar__header--left">
-                         <Tooltip title="User">
-                              <Avatar src={user.photoURL} alt={user.displayName} />
-                              <h4>{user.displayName}</h4>
-                         </Tooltip>
+                         <Avatar src={users.photoURL} alt={users.displayName} />
+                         <h4>{users.displayName}</h4>
                     </div>
                     <div className="sidebar__header--right">
                          <IconButton>
@@ -79,31 +88,32 @@ function Sidebar(user) {
                }
 
                <div className="sidebar__chat--addRooms">
-                    <IconButton>
+                    <IconButton onClick={() => setCreatingRoom(true)}>
                          <AddIcon />
                     </IconButton>
                </div>
 
-               <Dialog open={open} onClose={handleClose}>
+               <Dialog open={isCreatingRoom} onClose={() => setCreatingRoom(false)}>
                     <DialogTitle>Subscribe</DialogTitle>
                     <DialogContent>
                          <DialogContentText>
-                              To subscribe to this website, please enter your email address here. We
-                              will send updates occasionally.
+                              Type the name of your public room. Every user will be able to join the room
                          </DialogContentText>
                          <TextField
                               autoFocus
+                              onChange={event => setroomName(event.target.value)}
+                              value={roomName}
                               margin="dense"
-                              id="name"
-                              label="Email Address"
-                              type="email"
+                              id="roomName"
+                              label="Room name"
+                              type="text"
                               fullWidth
                               variant="standard"
                          />
                     </DialogContent>
                     <DialogActions>
-                         <Button onClick={handleClose}>Cancel</Button>
-                         <Button onClick={handleClose}>Subscribe</Button>
+                         <Button color="error" onClick={() => setCreatingRoom(false)}>Cancel</Button>
+                         <Button color="success" onClick={createRoom}>Submit</Button>
                     </DialogActions>
                </Dialog>
           </div>

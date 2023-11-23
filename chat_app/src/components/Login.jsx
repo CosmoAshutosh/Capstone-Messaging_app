@@ -1,14 +1,14 @@
 import React from "react";
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import { useSignInWithGoogle, useSignInWithGithub, useSignInWithFacebook, useSignInWithTwitter } from "react-firebase-hooks/auth";
+import { useSignInWithGoogle, useSignInWithGithub, useSignInWithFacebook } from "react-firebase-hooks/auth";
 import { auth } from "./Firebase/firebase";
 
-function Welcome() {
+function Login() {
 
-     const [signInWithGoogle, Googleuser, Googleloading, Googleerror] = useSignInWithGoogle(auth);
-     const [signInWithGithub, Githubuser, Githubloading, Githuberror] = useSignInWithGithub(auth);
-     const [signInWithFacebook, Facebookuser, Facebookloading, Facebookerror] = useSignInWithFacebook(auth);
+     const [signInWithGoogle] = useSignInWithGoogle(auth);
+     const [signInWithGithub] = useSignInWithGithub(auth);
+     const [signInWithFacebook] = useSignInWithFacebook(auth);
 
      return (
           <div className="welcome-container" >
@@ -36,4 +36,4 @@ function Welcome() {
      );
 }
 
-export default Welcome;
+export default Login;

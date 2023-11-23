@@ -9,7 +9,7 @@ function useAuthUser() {
      useEffect (() => {
           if(user) {
 
-               const userRef = doc(db, `users/${user.uid}`);
+               const userRef = doc(db, `Users/${user.uid}`);
                getDoc(userRef).then(snapshot => {
                     if(!snapshot.exists()){
                          setDoc(snapshot.ref, {
