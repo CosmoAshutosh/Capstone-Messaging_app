@@ -13,8 +13,12 @@ function App() {
      return (
           <div className="app">
                <div className="app__body">
-                    <Sidebar users = {user} />
-                    <Chats user = {user} />
+                    <Sidebar 
+                         users = {user}
+                    />
+                    <Chats 
+                         user = {user}
+                    />
                </div>
           </div>
      )

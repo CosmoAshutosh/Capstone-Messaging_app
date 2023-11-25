@@ -4,9 +4,6 @@ import AddIcon from '@mui/icons-material/Add';
 import React, { useState } from "react";
 import SidebarTabs from "./SidebarTabs";
 import SidebarList from "./SidebarList";
-import Home from "./Home";
-import Message from "./Message";
-import PeopleAlt from "./PeopleAlt";
 import { useRouter } from "next/router";
 import { collection, getDocs, serverTimestamp, where } from "firebase/firestore";
 import { auth, db } from "../Firebase/firebase";
@@ -29,7 +26,7 @@ const tabs = [{
 },
 ];
 
-function Sidebar({ users }) {
+export default function Sidebar({ users }) {
 
      const [menu, setMenu] = useState(1);
      const [isCreatingRoom, setCreatingRoom] = useState(false);
@@ -159,5 +156,3 @@ function Sidebar({ users }) {
           </div>
      );
 }
-
-export default Sidebar;

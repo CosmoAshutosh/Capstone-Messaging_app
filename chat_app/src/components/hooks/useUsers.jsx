@@ -3,7 +3,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "../Firebase/firebase";
 
 
-function useUsers() {
+function useUsers(user) {
      const [snapshot] = useCollection(query(collection(db, "rooms"), orderBy('timestamp', 'desc')));
 
      const users = [];

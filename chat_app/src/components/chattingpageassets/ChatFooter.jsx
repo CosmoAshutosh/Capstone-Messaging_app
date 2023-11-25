@@ -83,7 +83,7 @@ export default function ChatFooter(input, onChange, image, user, room, roomId, s
                timestamp: serverTimestamp(),
                time: new Date().toUTCString(),
                audioURL: "uploading",
-               audioName
+               audioName,
           })
           await uploadBytes(ref(storage, `audio/${audioName}`), audioFile)
           const url = await getDownloadURL(ref(storage, `audio/${audioName}`))

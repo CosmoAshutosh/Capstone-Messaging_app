@@ -1,4 +1,7 @@
-function ChatMessages() {
+import { CircularProgress } from "@mui/material";
+import AudioPlayer from "../utils/AudioPlayer"
+
+function ChatMessages(messages, user, roomId, audioId, setAudioId,) {
 
      if (!messages) return null
 
@@ -13,7 +16,7 @@ function ChatMessages() {
 
                          <div className="image-container">
                               <div className="image__container--loader">
-                                   <Circular Progress style={{ width: 40, height: 40 }} />
+                                   <CircularProgress style={{ width: 40, height: 40 }} />
                               </div>
                          </div>
                     ) : message.imageUrl ? (
@@ -23,7 +26,14 @@ function ChatMessages() {
                          : null}
 
                     {message.audioName ? (
-                         <div />
+                         <AudioPlayer 
+                              sender = {isSender}
+                              roomId = {roomId}
+                              id = {message.id}
+                              audioUrl = {message.audioUrl}
+                              audioId = {audioId}
+                              setAudioId = {setAudioId}
+                         />
                     ) : (
                          <span className="chat__message--message">{message.message}</span>
                     )}

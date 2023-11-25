@@ -1,3 +1,6 @@
+import { collection, orderBy, query } from "firebase/firestore";
+import { db } from "../Firebase/firebase";
+import { useCollection } from "react-firebase-hooks/firestore";
 
 
 function useChatMessages(roomId) {
@@ -6,7 +9,6 @@ function useChatMessages(roomId) {
           collection(db, `rooms/${roomId}/messages`), orderBy("timestamp", "asc")
      ) : null);
 
-     I
      const messages = snapshot?.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),

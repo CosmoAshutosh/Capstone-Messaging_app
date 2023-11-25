@@ -1,3 +1,7 @@
+import { doc } from "firebase/firestore";
+import { db } from "../Firebase/firebase";
+import { useDocument } from "react-firebase-hooks/firestore";
+
 export default function useRoom(roomId, userId) {
 
      const isUserRoom = roomId.includes(userId);
