@@ -1,24 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import useRoom from "../hooks/useRoom";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useState } from "react";
 import MediaPreview from "./MediaPeview";
 import ChatFooter from "./ChatFooter";
 import { nanoid } from "nanoid";
 import Compressor from "compressorjs";
+import useChatMessages from "../hooks/useChatMessages";
+import { db, storage } from "../Firebase/firebase";
+import { addDoc, doc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 function Chats() {
 	const router = useRouter()
 	const [image, setImage] = useState(null);
 	const [input, setInput] = useState('');
 	const [src, setSrc] = useState('');
-	const roomId = router.query.roomId ?? ""
+	const [audioId, setAudioId] = useState('')
+	const roomId = router.query.roomId ?? "";
 	const userId = user.uid
 	const room = useRoom(roomId, userId)
+	const messages = useChatMessages(roomId);
 
 	function showPreview(event) {
 		const file = event.target.files[0]
@@ -112,6 +117,12 @@ function Chats() {
 				</div>
 			</div>
 
+			<div className="chat__body--container">
+				<div className="chat__body">
+					<ChatMessages messages={messages} user={user} roomId={roomId} audioId={audioId} setAudioId={setAudioId} />
+				</div>
+			</div>
+
 			<MediaPreview src={src} closePreview={closePreview} />
 			<ChatFooter
 				input={input}
@@ -121,6 +132,7 @@ function Chats() {
 				room={room}
 				roomId={roomId}
 				sendMessage={sendMessage}
+				setAudioId={setAudioId}
 			/>
 		</div>
 	)

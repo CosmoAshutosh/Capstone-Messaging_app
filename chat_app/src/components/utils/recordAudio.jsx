@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 
 export default function recordAudio() {
+     
      return new Promise((resolve) => {
           navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
                const mediaRecorder = new MediaRecorder(stream);
