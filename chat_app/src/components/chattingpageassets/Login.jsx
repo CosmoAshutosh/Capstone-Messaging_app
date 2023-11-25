@@ -2,7 +2,7 @@ import React from "react";
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { useSignInWithGoogle, useSignInWithGithub, useSignInWithFacebook } from "react-firebase-hooks/auth";
-import { auth } from "./Firebase/firebase";
+import { auth } from "../Firebase/firebase";
 
 function Login() {
 

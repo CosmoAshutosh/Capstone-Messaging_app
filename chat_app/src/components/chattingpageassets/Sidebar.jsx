@@ -7,7 +7,12 @@ import SidebarList from "./SidebarList";
 import Home from "./Home";
 import Message from "./Message";
 import PeopleAlt from "./PeopleAlt";
-
+import { useRouter } from "next/router";
+import { collection, getDocs, serverTimestamp, where } from "firebase/firestore";
+import { auth, db } from "../Firebase/firebase";
+import useRooms from "../hooks/useRooms";
+import useUsers from "../hooks/useUsers";
+import useChats from "../hooks/useChats";
 
 
 const tabs = [{
@@ -24,19 +29,54 @@ const tabs = [{
 },
 ];
 
-function Sidebar({users}) {
+function Sidebar({ users }) {
 
-     const [menu, setMenu] = useState(1)
-     const [isCreatingRoom, setCreatingRoom] = useState(false)
-     const [roomName, setroomName] = useState('')
-     const data = [{
-          id: 1,
-          name: "Cecil Ekka",
-          photoURL: "none"
-     }]
+     const [menu, setMenu] = useState(1);
+     const [isCreatingRoom, setCreatingRoom] = useState(false);
+     const [searchResults, setSearchResults] = useState([]);
+     const [roomName, setroomName] = useState('');
+     const router = useRouter();
+     const rooms = useRooms();
+     const users = useUsers(users);
+     const chats = useChats(users)
+
 
      async function createRoom() {
-          
+          if (roomName?.trim()) {
+               const roomsRef = collection(db, 'rooms')
+               const newRoom = await addDoc(roomsRef, {
+                    name: roomName,
+                    timestamp: serverTimestamp()
+               })
+               setCreatingRoom(false);
+               setroomName("");
+               setMenu(2);
+               router.push(`/?roomId = ${newRoom.id}`)
+          }
+     };
+
+     async function searchUsersAndRooms(event) {
+          event.preventDefault();
+          const searchValue = event.target.elements.search.value
+          const userQuery = query(collection(db, 'users'), where("name", "==", searchValue))
+          const roomQuery = query(collection(db, 'rooms'), where("name", "==", searchValue))
+          const userSnapshot = await getDocs(userQuery)
+          const roomSnapshot = await getDocs(roomQuery)
+
+          const userResults = userSnapshot?.docs.map(doc => {
+               const id = doc.id > user.uid ? `${doc.id}${user.uid}` : `${user.uid}${doc.id}`;
+               return { id, ...doc.data() }
+
+          });
+
+          const roomResults = roomSnapshot?.docs.map((doc) => ({
+               id: doc.id,
+               ...doc.data(),
+          }));
+
+          const searchResults = [...userResults, ...roomResults];
+          setMenu(4)
+          setSearchResults(searchResults);
      }
 
      return (
@@ -47,13 +87,13 @@ function Sidebar({users}) {
                          <h4>{users.displayName}</h4>
                     </div>
                     <div className="sidebar__header--right">
-                         <IconButton>
+                         <IconButton onClick={() => auth.signOut()}>
                               <ExitToAppIcon />
                          </IconButton>
                     </div>
                </div>
                <div className="sidebar__search">
-                    <form className="sidebar__search-container">
+                    <form onSubmit={searchUsersAndRooms} className="sidebar__search-container">
                          <input
                               type="text"
                               id="search"
@@ -77,13 +117,13 @@ function Sidebar({users}) {
                </div>
 
                {menu === 1 ? (
-                    <SidebarList title="Chats" data={data} />
+                    <SidebarList title="Chats" data={chats} />
                ) : menu === 2 ? (
-                    <SidebarList title="Rooms" data={data} />
+                    <SidebarList title="Rooms" data={rooms} />
                ) : menu === 3 ? (
-                    <SidebarList title="Users" data={data} />
+                    <SidebarList title="Users" data={users} />
                ) : menu === 4 ? (
-                    <SidebarList title="Search Result" data={data} />
+                    <SidebarList title="Search Result" data={searchResults} />
                ) : null
                }
 
@@ -117,7 +157,7 @@ function Sidebar({users}) {
                     </DialogActions>
                </Dialog>
           </div>
-     )
+     );
 }
 
 export default Sidebar;

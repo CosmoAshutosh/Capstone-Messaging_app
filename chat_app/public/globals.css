@@ -497,13 +497,6 @@ em {
      transform: scale(3);
 }
 
-.cancel-root {
-     background-color: #ffffff;
-     border-radius: 50%;
-     width: 25px;
-     height: 25px;
-}
-
 .no-result>div {
      transform: scale(1.8);
 }
