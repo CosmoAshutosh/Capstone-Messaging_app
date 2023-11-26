@@ -81,7 +81,7 @@ function Chats({ user }) {
 		}
 	}
 
-	async function deleteRoom(){
+	async function deleteRoom() {
 		setOpenMenu(null)
 		setDeleting(true)
 
@@ -94,10 +94,10 @@ function Chats({ user }) {
 			const imageFiles = []
 
 			roomMessages?.docs.forEach(doc => {
-				if(doc.data().audioName){
+				if (doc.data().audioName) {
 					audioFiles.push(doc.data().audioName)
 				}
-				else if(doc.data().imageName){
+				else if (doc.data().imageName) {
 					imageFiles.push(doc.data().imageName)
 				}
 			});
@@ -109,10 +109,10 @@ function Chats({ user }) {
 				...audioFiles.map(audioName => deleteObject(ref(storage, `audio/${audio}`)))
 			])
 		}
-		catch(error){
+		catch (error) {
 			console.error("Error deleting room: ", error.message)
 		}
-		finally{
+		finally {
 			setDeleting(false)
 		}
 	}
