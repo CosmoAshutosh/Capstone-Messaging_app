@@ -1,32 +1,35 @@
 import { Avatar, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, TextField } from "@mui/material";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import HomeIcon from '@mui/icons-material/Home';
 import AddIcon from '@mui/icons-material/Add';
 import React, { useState } from "react";
 import SidebarTabs from "./SidebarTabs";
 import SidebarList from "./SidebarList";
 import { useRouter } from "next/router";
-import { collection, getDocs, serverTimestamp, where } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, serverTimestamp, where } from "firebase/firestore";
 import { auth, db } from "../Firebase/firebase";
 import useRooms from "../hooks/useRooms";
 import useUsers from "../hooks/useUsers";
 import useChats from "../hooks/useChats";
+import Public from "@mui/icons-material/Public";
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 
 const tabs = [{
      id: 1,
-     icon: <Home />,
+     icon: <HomeIcon />,
 },
 {
      id: 2,
-     icon: <Message />,
+     icon: <Public />,
 },
 {
      id: 3,
-     icon: <PeopleAlt />,
+     icon: <PeopleAltIcon />,
 },
 ];
 
-export default function Sidebar({ users }) {
+export default function Sidebar({ user }) {
 
      const [menu, setMenu] = useState(1);
      const [isCreatingRoom, setCreatingRoom] = useState(false);

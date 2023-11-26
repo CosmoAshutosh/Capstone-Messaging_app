@@ -17,9 +17,9 @@ import ChatMessages from "./ChatMessages";
 function Chats({ user }) {
 	const router = useRouter()
 	const [image, setImage] = useState(null);
-	const [input, setInput] = useState('');
-	const [src, setSrc] = useState('');
-	const [audioId, setAudioId] = useState('');
+	const [input, setInput] = useState("");
+	const [src, setSrc] = useState("");
+	const [audioId, setAudioId] = useState("");
 	const [openMenu, setOpenMenu] = useState(null);
 	const [isDeleting, setDeleting] = useState(false);
 	const roomId = router.query.roomId ?? "";

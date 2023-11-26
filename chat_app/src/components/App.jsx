@@ -13,11 +13,11 @@ function App() {
      return (
           <div className="app">
                <div className="app__body">
-                    <Sidebar 
-                         users = {user}
+                    <Sidebar
+                         users={user}
                     />
-                    <Chats 
-                         user = {user}
+                    <Chats
+                         user={user}
                     />
                </div>
           </div>
