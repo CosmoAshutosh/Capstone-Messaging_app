@@ -10,7 +10,6 @@ import {
      TextField,
 } from "@mui/material";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import useRooms from "src/hooks/useRooms";
@@ -21,7 +20,7 @@ import { auth, db } from "src/utils/firebase";
 import SidebarList from "./SidebarList";
 import SidebarTabs from "./SidebarTabs";
 import HomeIcon from "@mui/icons-material/Home"
-import { PeopleAlt, Public } from "@mui/icons-material";
+import { Add, PeopleAlt, Public, SearchOutlined } from "@mui/icons-material";
 
 
 const tabs = [
@@ -107,15 +106,14 @@ export default function Sidebar(user) {
                     </div>
                </div>
                <div className="sidebar__search">
-                    <form
-                         onSubmit={searchUsersAndRooms}
-                         className="sidebar__search-container"
-                    >
+                    <form onSubmit={searchUsersAndRooms} className="sidebar__search--container" >
+                         <SearchOutlined />
                          <input
                               type="text"
                               id="search"
-                              placeholder="Seaarch for user or rooms"
+                              placeholder="Search for user or rooms"
                          />
+
                     </form>
                </div>
 
@@ -144,9 +142,9 @@ export default function Sidebar(user) {
                     <SidebarList title="Search Result" data={searchResults} />
                ) : null}
 
-               <div className="sidebar__chat--addRooms">
+               <div className="sidebar__chat--addRoom">
                     <IconButton onClick={() => setCreatingRoom(true)}>
-                         <AddIcon />
+                         <Add />
                     </IconButton>
                </div>
 

@@ -343,7 +343,7 @@ em {
   box-shadow: 0px 0px 8px 0px #00000016;
   /*border: 1px solid #00000016;*/
   border-radius: 20px;
-  padding-right: 13px;
+  padding-left: 13px;
 }
 
 .sidebar__search--container>.MuiSvgIcon-root {
