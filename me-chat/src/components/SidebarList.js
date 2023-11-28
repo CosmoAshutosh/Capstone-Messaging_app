@@ -24,7 +24,7 @@ function SidebarList({ title, data }) {
      }
 
      return (
-          <div className="sidebar__chat--addRoom" >
+          <div className="sidebar__chat--container" >
                <h2>{title}</h2>
                {data.map(item => (
                     <SidebarListItems key={item.id} item={item} />

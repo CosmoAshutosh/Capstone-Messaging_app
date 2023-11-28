@@ -9,7 +9,6 @@ import {
      IconButton,
      TextField,
 } from "@mui/material";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import useRooms from "src/hooks/useRooms";
@@ -20,7 +19,7 @@ import { auth, db } from "src/utils/firebase";
 import SidebarList from "./SidebarList";
 import SidebarTabs from "./SidebarTabs";
 import HomeIcon from "@mui/icons-material/Home"
-import { Add, PeopleAlt, Public, SearchOutlined } from "@mui/icons-material";
+import { Add, ExitToApp, Message, PeopleAlt, SearchOutlined } from "@mui/icons-material";
 
 
 const tabs = [
@@ -30,7 +29,7 @@ const tabs = [
      },
      {
           id: 2,
-          icon: <Public />,
+          icon: <Message />,
      },
      {
           id: 3,
@@ -38,7 +37,7 @@ const tabs = [
      },
 ];
 
-export default function Sidebar(user) {
+export default function Sidebar({ user }) {
      const [menu, setMenu] = useState(1);
      const [isCreatingRoom, setCreatingRoom] = useState(false);
      const [searchResults, setSearchResults] = useState([]);
@@ -92,16 +91,22 @@ export default function Sidebar(user) {
           setSearchResults(searchResults);
      }
 
+     const data = [{
+          id: 1,
+          name: "Cecil Ekka",
+          photoURL: "https://cdn-icons-png.flaticon.com/512/3600/3600912.png"
+     }]
+
      return (
           <div className="sidebar">
                <div className="sidebar__header">
                     <div className="sidebar__header--left">
-                         <Avatar src={users.photoURL} alt={users.displayName} />
-                         <h4>{users.displayName}</h4>
+                         <Avatar src={user?.photoURL} alt={user?.displayName} />
+                         <h4 style={{ fontWeight: "bold", fontSize: "1.2rem" }}>{user?.displayName}</h4>
                     </div>
                     <div className="sidebar__header--right">
                          <IconButton onClick={() => auth.signOut()}>
-                              <ExitToAppIcon />
+                              <ExitToApp />
                          </IconButton>
                     </div>
                </div>
@@ -113,12 +118,11 @@ export default function Sidebar(user) {
                               id="search"
                               placeholder="Search for user or rooms"
                          />
-
                     </form>
                </div>
 
                <div className="sidebar__menu">
-                    {tabs.map((tab) => (
+                    {tabs.map(tab => (
                          <SidebarTabs
                               key={tab.id}
                               onClick={() => setMenu(tab.id)}
@@ -126,7 +130,7 @@ export default function Sidebar(user) {
                          >
                               <div className="sidebar__menu--home">
                                    {tab.icon}
-                                   <div className="sidebarr__menu--line"></div>
+                                   <div className="sidebar__menu--line"></div>
                               </div>
                          </SidebarTabs>
                     ))}
