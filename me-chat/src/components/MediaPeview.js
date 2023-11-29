@@ -8,7 +8,7 @@ function MediaPreview({ src, closePreview }) {
      return (
           <div className="mediaPreview">
                <CloseIcon onClick={closePreview} />
-               <img src='src' alt='Preview' />
+               <img src={src} alt='Preview' />
           </div>
      )
 }

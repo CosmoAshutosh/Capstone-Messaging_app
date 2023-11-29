@@ -1,7 +1,7 @@
 import { CircularProgress } from "@mui/material";
 import SidebarListItems from "./SidebarListItems";
 import React from "react";
-import { NoAccounts, NoAccountsOutlined, NoAccountsTwoTone } from "@mui/icons-material";
+import { NoAccounts } from "@mui/icons-material";
 
 function SidebarList({ title, data }) {
      console.log(`Title: ${title}`);

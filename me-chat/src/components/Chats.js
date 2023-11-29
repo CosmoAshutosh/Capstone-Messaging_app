@@ -140,7 +140,7 @@ function Chats({user}) {
 						onChange={showPreview}
 					/>
 					<IconButton>
-						<label style={{ cursor: "pointer", height: 24 }}>
+						<label style={{ cursor: "pointer", height: 24 }} htmlFor="image">
 							<AddPhotoAlternateIcon />
 						</label>
 					</IconButton>

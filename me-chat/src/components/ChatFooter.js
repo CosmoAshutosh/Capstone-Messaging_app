@@ -2,14 +2,14 @@ import SendIcon from '@mui/icons-material/Send';
 import React, { useEffect, useRef, useState } from 'react';
 import MicIcon from '@mui/icons-material/Mic';
 import CancelIcon from '@mui/icons-material/Cancel';
-import ArrowUpward from '@mui/icons-material/ArrowUpward';
 import recordAudio from '../utils/recordAudio';
 import { addDoc, collection, doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import { db, storage } from '../utils/firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { nanoid } from 'nanoid';
+import { CheckCircleRounded } from '@mui/icons-material';
 
-export default function ChatFooter({input, onChange, image, user, room, roomId, sendMessage, setAudioId}) {
+export default function ChatFooter({ input, onChange, image, user, room, roomId, sendMessage, setAudioId }) {
 
      const record = useRef()
      const [isRecording, setRecording] = useState(false)
@@ -32,7 +32,7 @@ export default function ChatFooter({input, onChange, image, user, room, roomId, 
      }, [isRecording])
 
      function pad(value) {
-          return String(value).length < 2 ? `0%{value}` : value;
+          return String(value).length < 2 ? `0${value}` : value;
      }
 
      function startTimer() {
@@ -107,7 +107,7 @@ export default function ChatFooter({input, onChange, image, user, room, roomId, 
                <form >
                     <input
                          placeholder="Type a message"
-                         style={{ width: isRecording ? "calc(100% -20px)" : "calc(100% - 112px)", }}
+                         style={{ width: isRecording ? "calc(100% - 20px)" : "calc(100% - 112px)", }}
                          value={input}
                          onChange={onChange}
                     />
@@ -130,13 +130,13 @@ export default function ChatFooter({input, onChange, image, user, room, roomId, 
                     )}
                </form>
 
-               {isRecording && <div className='redord'>
+               {isRecording && <div className='record'>
                     <CancelIcon sx={{ width: 30, height: 30, color: '#f20519' }} onClick={stopRecording} />
                     <div>
                          <div className='record__redcircle' />
                          <div className='record__duration' >{duration}</div>
                     </div>
-                    <ArrowUpward sx={{ width: 30, height: 30, color: '#41bf49' }} onClick={finishRecording} />
+                    <CheckCircleRounded sx={{ width: 30, height: 30, color: '#41bf49' }} onClick={finishRecording} />
                </div>
                }
           </div>

@@ -8,7 +8,8 @@ function SidebarListItems({ item }) {
                <div className="sidebar__chat">
                     <div className="avatar__container">
                          <Avatar
-                              src={item.photoURL || `https://avatars.dicebear.com/api/jdenticon/${item.id}.svg`}
+                              src={item.photoURL || `https://api.dicebear.com/7.x/bottts/svg`}
+                              // src={item.photoURL || `https://api.dicebear.com/7.x/${item.id}/svg`}
                               style={{ width: 45, height: 45 }}
                          />
                     </div>
