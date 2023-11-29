@@ -9,7 +9,7 @@ import { db, storage } from '../utils/firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { nanoid } from 'nanoid';
 
-export default function ChatFooter(input, onChange, image, user, room, roomId, sendMessage, setAudioId) {
+export default function ChatFooter({input, onChange, image, user, room, roomId, sendMessage, setAudioId}) {
 
      const record = useRef()
      const [isRecording, setRecording] = useState(false)
@@ -133,7 +133,7 @@ export default function ChatFooter(input, onChange, image, user, room, roomId, s
                {isRecording && <div className='redord'>
                     <CancelIcon sx={{ width: 30, height: 30, color: '#f20519' }} onClick={stopRecording} />
                     <div>
-                         <div className='record__redcircle' />\
+                         <div className='record__redcircle' />
                          <div className='record__duration' >{duration}</div>
                     </div>
                     <ArrowUpward sx={{ width: 30, height: 30, color: '#41bf49' }} onClick={finishRecording} />

@@ -1,11 +1,11 @@
 import { CircularProgress } from "@mui/material";
 import AudioPlayer from "./AudioPlayer"
 
-function ChatMessages(messages, user, roomId, audioId, setAudioId,) {
+function ChatMessages({messages, user, roomId, audioId, setAudioId}) {
 
      if (!messages) return null
 
-     return messages.map(message => {
+     return (messages.map(message => {
 
           const isSender = message.uid === user.uid
 
@@ -41,7 +41,7 @@ function ChatMessages(messages, user, roomId, audioId, setAudioId,) {
                     <span className="chat__timestamp">{message.time}</span>
                </div>
           )
-     })
+     }))
 }
 
 export default ChatMessages;

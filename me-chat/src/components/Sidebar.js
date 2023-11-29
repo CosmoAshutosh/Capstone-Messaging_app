@@ -37,11 +37,13 @@ const tabs = [
      },
 ];
 
+
 export default function Sidebar({ user }) {
+
      const [menu, setMenu] = useState(1);
      const [isCreatingRoom, setCreatingRoom] = useState(false);
      const [searchResults, setSearchResults] = useState([]);
-     const [roomName, setroomName] = useState("");
+     const [roomName, setRoomName] = useState("");
      const router = useRouter();
      const rooms = useRooms();
      const users = useUsers(user);
@@ -55,7 +57,7 @@ export default function Sidebar({ user }) {
                     timestamp: serverTimestamp(),
                });
                setCreatingRoom(false);
-               setroomName("");
+               setRoomName("");
                setMenu(2);
                router.push(`/?roomId = ${newRoom.id}`);
           }
@@ -63,6 +65,7 @@ export default function Sidebar({ user }) {
 
      async function searchUsersAndRooms(event) {
           event.preventDefault();
+          
           const searchValue = event.target.elements.search.value;
           const userQuery = query(
                collection(db, "users"),
@@ -90,12 +93,6 @@ export default function Sidebar({ user }) {
           setMenu(4);
           setSearchResults(searchResults);
      }
-
-     const data = [{
-          id: 1,
-          name: "Cecil Ekka",
-          photoURL: "https://cdn-icons-png.flaticon.com/512/3600/3600912.png"
-     }]
 
      return (
           <div className="sidebar">
@@ -137,13 +134,13 @@ export default function Sidebar({ user }) {
                </div>
 
                {menu === 1 ? (
-                    <SidebarList title="Chats" data={chats} />
+                    <SidebarList title={"Chats"} data={chats} />
                ) : menu === 2 ? (
-                    <SidebarList title="Rooms" data={rooms} />
+                    <SidebarList title={"Rooms"} data={rooms} />
                ) : menu === 3 ? (
-                    <SidebarList title="Users" data={users} />
+                    <SidebarList title={"Users"} data={users} />
                ) : menu === 4 ? (
-                    <SidebarList title="Search Result" data={searchResults} />
+                    <SidebarList title={"Search Result"} data={searchResults} />
                ) : null}
 
                <div className="sidebar__chat--addRoom">
@@ -161,14 +158,15 @@ export default function Sidebar({ user }) {
                          </DialogContentText>
                          <TextField
                               autoFocus
-                              onChange={(event) => setroomName(event.target.value)}
+                              onChange={event => setRoomName(event.target.value)}
                               value={roomName}
                               margin="dense"
                               id="roomName"
                               label="Room name"
                               type="text"
                               fullWidth
-                              variant="standard"
+                              variant="filled"
+                              style={{ marginTop: 20 }}
                          />
                     </DialogContent>
                     <DialogActions>

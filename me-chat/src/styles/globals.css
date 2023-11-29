@@ -240,6 +240,7 @@ em {
   opacity: 0;
   animation: noresult-fade-in 400ms forwards;
   padding: 1em;
+  gap: 40px;
 }
 
 .no-result>div>.MuiSvgIcon-root:nth-child(1) {

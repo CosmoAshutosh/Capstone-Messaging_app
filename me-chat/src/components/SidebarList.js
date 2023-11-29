@@ -1,9 +1,12 @@
 import { CircularProgress } from "@mui/material";
-import SearchOffIcon from '@mui/icons-material/SearchOff';
 import SidebarListItems from "./SidebarListItems";
 import React from "react";
+import { NoAccounts, NoAccountsOutlined, NoAccountsTwoTone } from "@mui/icons-material";
 
 function SidebarList({ title, data }) {
+     console.log(`Title: ${title}`);
+     console.log("Data:", data);
+     
      if (!data) {
           return (
                <div className="loader__container sidebar__loader">
@@ -16,7 +19,7 @@ function SidebarList({ title, data }) {
           return (
                <div className="no-result">
                     <div>
-                         <SearchOffIcon />
+                         <NoAccounts />
                     </div>
                     <h2>No {title}</h2>
                </div>

@@ -5,7 +5,7 @@ import { db } from "src/utils/firebase";
 
 
 function useUsers(user) {
-     const [snapshot] = useCollection(query(collection(db, "rooms"), orderBy('timestamp', 'desc')));
+     const [snapshot] = useCollection(query(collection(db, "users"), orderBy("timestamp", "desc")));
 
      const users = [];
 

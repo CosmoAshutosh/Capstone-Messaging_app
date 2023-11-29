@@ -5,7 +5,7 @@ export default function App({ Component, pageProps }) {
      return (
           <main>
                <Head>
-                    <title>MeChat</title>
+                    <title>SwiftWhisper</title>
                     <link rel="icon" type="image/x-icon" href="/favicon.ico?v=1" />
                </Head>
                <Component {...pageProps} />

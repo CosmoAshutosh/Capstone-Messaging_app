@@ -14,7 +14,7 @@ import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage
 import ChatMessages from "./ChatMessages";
 import { db, storage } from "src/utils/firebase";
 
-function Chats(user) {
+function Chats({user}) {
 	const router = useRouter()
 	const [image, setImage] = useState(null);
 	const [input, setInput] = useState('');
