@@ -9,12 +9,15 @@ import {
 import { auth } from "src/utils/firebase";
 
 function Login() {
+
+     // Authentication hooks for different sign-in methods
      const [signInWithGoogle] = useSignInWithGoogle(auth)
      const [signInWithGithub] = useSignInWithGithub(auth)
      const [signInWithFacebook] = useSignInWithFacebook(auth)
 
      return (
           <div className="welcome-container">
+               {/* Paper component for styling the login container */}
                <Paper
                     elevation={8}
                     sx={{
@@ -26,16 +29,19 @@ function Login() {
                          height: "600px",
                          display: "flex",
                          alignItems: "center",
-                         justifyContent: "center",
+                         justifycontent: "space-evenly",
                          flexDirection: "column",
                     }}
                >
                     <div className="loginIcon">
                          <img
-                              src="https://img.freepik.com/free-vector/gradient-quill-pen-design-template_23-2149837194.jpg?w=740&t=st=1697582801~exp=1697583401~hmac=8841801666034a0a70215399908ce036ed0ce87530297748c3f311927d30dbf9"
+                              src="/logo.png"
                               alt="logo"
+                              style={{ height: "300px", width: "300px" }}
                          ></img>
                     </div>
+
+                    {/* Login options with buttons for different authentication providers */}
                     <div className="loginOptions">
                          <Button
                               variant="outlined"
@@ -45,6 +51,7 @@ function Login() {
                               Login with Google
                          </Button>
 
+                         {/* Button for signing in with Facebook */}
                          <Button
                               variant="outlined"
                               sx={{ width: "250px", color: "black", border: "2px solid" }}
@@ -53,6 +60,7 @@ function Login() {
                               Login with Facebook
                          </Button>
 
+                         {/* Button for signing in with Github */}
                          <Button
                               variant="outlined"
                               sx={{ width: "250px", color: "black", border: "2px solid" }}

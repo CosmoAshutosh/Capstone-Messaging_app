@@ -17,7 +17,7 @@ body {
   max-height: 100vh;
   height: 100vh;
   width: 100%;
-  background-image: url("https://img.freepik.com/free-photo/abstract-nature-design-with-wave-pattern-backdrop-generative-ai_188544-12578.jpg?w=1380&t=st=1700754208~exp=1700754808~hmac=8ff9092336c76dcc029d3b9c059faaefe41b4a0cd2b7323bacc17c3ccb620bae");
+  background-image: url("https://img.freepik.com/free-vector/background-luxury-minimalist-gradient-style-design_698780-702.jpg?w=1060&t=st=1700754103~exp=1700754703~hmac=31de351f477b39ba81a7089d269b31b9736e83699a3b3fdc14f7eaac1af9c5d2");
   /* https://img.freepik.com/free-vector/background-luxury-minimalist-gradient-style-design_698780-702.jpg?w=1060&t=st=1700754103~exp=1700754703~hmac=31de351f477b39ba81a7089d269b31b9736e83699a3b3fdc14f7eaac1af9c5d2 */
   /* https://img.freepik.com/free-photo/abstract-nature-design-with-wave-pattern-backdrop-generative-ai_188544-12578.jpg?w=1380&t=st=1700754208~exp=1700754808~hmac=8ff9092336c76dcc029d3b9c059faaefe41b4a0cd2b7323bacc17c3ccb620bae */
   /* https://img.freepik.com/free-vector/geometric-triangle-pattern-illustration_53876-81185.jpg?w=1060&t=st=1700754162~exp=1700754762~hmac=6e74d513c2f304049b18fe1e1fdaf6e9ff892ca179ea456f9dc7bd3ed04833a9 */
@@ -27,7 +27,7 @@ body {
 }
 
 .loginIcon {
-  padding-top: 50px;
+  padding-top: 0px;
   width: 100%;
   text-align: center;
 }
@@ -44,7 +44,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
 
 }
 

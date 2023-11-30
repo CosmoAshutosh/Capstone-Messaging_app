@@ -11,7 +11,8 @@ function useAuthUser() {
                const userRef = doc(db, `users/${user.uid}`);
                getDoc(userRef).then((snapshot) => {
                     if (!snapshot.exists()) {
-                         setDoc(snapshot.ref, {
+                         // Corrected the reference from `snapshot.ref` to `userRef`
+                         setDoc(userRef, {
                               name: user.displayName,
                               photoURL: user.photoURL,
                               timestamp: serverTimestamp(),

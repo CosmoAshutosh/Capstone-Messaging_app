@@ -9,17 +9,21 @@ export default function AudioPlayer({
      setAudioId,
      audioId,
 }) {
+     // State variables
      const [isPlaying, setPlaying] = useState(false);
      const [isMediaLoaded, setMediaLoaded] = useState(false);
      const [isLoaded, setLoaded] = useState(false);
      const [isMetadataLoaded, setMetadataLoaded] = useState(false);
      const [sliderValue, setSliderValue] = useState(0);
      const [duration, setDuration] = useState("");
+
+     // Refs
      const totalDuration = useRef("");
      const audio = useRef(new Audio(audioUrl));
      const interval = useRef();
      const isUploading = useRef(audioUrl === "uploading");
 
+     // Effect to handle changes in audio URL
      useEffect(() => {
           if (isUploading.current && audioUrl !== "uploading") {
                audio.current = new Audio(audioUrl);
@@ -30,6 +34,7 @@ export default function AudioPlayer({
           }
      }, [audioUrl]);
 
+     // Effect to get audio duration once loaded
      useEffect(() => {
           if (isLoaded) {
                getAudioDuration(audio.current).then(() => {
@@ -38,6 +43,7 @@ export default function AudioPlayer({
           }
      }, [isLoaded]);
 
+     // Effect to set up event listeners once metadata is loaded
      useEffect(() => {
           if (isMetadataLoaded) {
                audio.current.addEventListener("canplaythrough", () => {
@@ -58,6 +64,7 @@ export default function AudioPlayer({
           }
      }, [isMetadataLoaded]);
 
+     // Effect to pause audio when switching to a different audio ID
      useEffect(() => {
           if (audioId !== id) {
                audio.current.pause();
@@ -65,6 +72,7 @@ export default function AudioPlayer({
           }
      }, [audioId, id]);
 
+     // Function to get audio duration
      function getAudioDuration(media) {
           return new Promise((resolve) => {
                media.onloadedmetadata = () => {
@@ -78,6 +86,7 @@ export default function AudioPlayer({
           });
      }
 
+     // Function to format time in MM:SS format
      function formatTime(time) {
           let minutes = Math.floor(time / 60);
           let seconds = Math.floor(time - minutes * 60);
@@ -92,6 +101,7 @@ export default function AudioPlayer({
           return `${minutes}:${seconds}`;
      }
 
+     // Function to play audio
      function playAudio() {
           setPlaying(true);
           audio.current.play();
@@ -101,6 +111,7 @@ export default function AudioPlayer({
           interval.current = setInterval(updateSlider, 100);
      }
 
+     // Function to update slider and time during playback
      function updateSlider() {
           let sliderPosition = 0;
 
@@ -113,6 +124,7 @@ export default function AudioPlayer({
           }
      }
 
+     // Function to stop audio playback
      function stopAudio() {
           audio.current.pause();
           clearInterval(interval.current);
@@ -120,6 +132,7 @@ export default function AudioPlayer({
           setDuration(totalDuration.current);
      }
 
+     // Function to scrub through audio
      function scrubAudio(event) {
           const value = event.target.value;
           const { duration } = audio.current;
@@ -133,15 +146,17 @@ export default function AudioPlayer({
 
      return (
           <>
+               {/* Audio player UI */}
                <div className={`audioplayer ${sender ? "" : "audioplayer__alt"}`}>
                     {!isMediaLoaded ? (
                          <CircularProgress />
                     ) : isPlaying ? (
                          <PauseRounded onClick={stopAudio} className="pause" />
-                    ) : !isPlaying ? (
+                    ) : (
                          <PlayArrowRounded onClick={playAudio} />
-                    ) : null}
+                    )}
                     <div>
+                         {/* Slider for audio playback progress */}
                          <span
                               style={{ width: `${sliderValue}%` }}
                               className="audioplayer__slider--played"
@@ -156,6 +171,7 @@ export default function AudioPlayer({
                          />
                     </div>
                </div>
+               {/* Display duration of the audio */}
                <span className="chat__timestamp audioplayer__time">{duration}</span>
           </>
      );

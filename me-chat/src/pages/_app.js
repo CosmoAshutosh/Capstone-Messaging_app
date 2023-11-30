@@ -6,7 +6,7 @@ export default function App({ Component, pageProps }) {
           <main>
                <Head>
                     <title>SwiftWhisper</title>
-                    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=1" />
+                    <link rel="icon" type="image/x-icon" href="/logo.png" />
                </Head>
                <Component {...pageProps} />
           </main>

@@ -21,7 +21,6 @@ import SidebarTabs from "./SidebarTabs";
 import HomeIcon from "@mui/icons-material/Home"
 import { Add, ExitToApp, Message, PeopleAlt, SearchOutlined } from "@mui/icons-material";
 
-
 const tabs = [
      {
           id: 1,
@@ -37,9 +36,7 @@ const tabs = [
      },
 ];
 
-
 export default function Sidebar({ user }) {
-
      const [menu, setMenu] = useState(1);
      const [isCreatingRoom, setCreatingRoom] = useState(false);
      const [searchResults, setSearchResults] = useState([]);
@@ -49,6 +46,7 @@ export default function Sidebar({ user }) {
      const users = useUsers(user);
      const chats = useChats(user);
 
+     // Function to create a room
      async function createRoom() {
           if (roomName?.trim()) {
                const roomsRef = collection(db, "rooms");
@@ -59,13 +57,14 @@ export default function Sidebar({ user }) {
                setCreatingRoom(false);
                setRoomName("");
                setMenu(2);
-               router.push(`/?roomId = ${newRoom.id}`);
+               router.push(`/?roomId=${newRoom.id}`);
           }
      }
 
+     // Function to search for users and rooms
      async function searchUsersAndRooms(event) {
           event.preventDefault();
-          
+
           const searchValue = event.target.elements.search.value;
           const userQuery = query(
                collection(db, "users"),
@@ -96,19 +95,26 @@ export default function Sidebar({ user }) {
 
      return (
           <div className="sidebar">
+               {/* Sidebar header */}
                <div className="sidebar__header">
                     <div className="sidebar__header--left">
+                         {/* User's avatar and display name */}
                          <Avatar src={user?.photoURL} alt={user?.displayName} />
-                         <h4 style={{ fontWeight: "bold", fontSize: "1.2rem" }}>{user?.displayName}</h4>
+                         <h4 style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+                              {user?.displayName}
+                         </h4>
                     </div>
                     <div className="sidebar__header--right">
+                         {/* Logout button */}
                          <IconButton onClick={() => auth.signOut()}>
                               <ExitToApp />
                          </IconButton>
                     </div>
                </div>
+
+               {/* Sidebar search bar */}
                <div className="sidebar__search">
-                    <form onSubmit={searchUsersAndRooms} className="sidebar__search--container" >
+                    <form onSubmit={searchUsersAndRooms} className="sidebar__search--container">
                          <SearchOutlined />
                          <input
                               type="text"
@@ -118,8 +124,9 @@ export default function Sidebar({ user }) {
                     </form>
                </div>
 
+               {/* Sidebar tabs */}
                <div className="sidebar__menu">
-                    {tabs.map(tab => (
+                    {tabs.map((tab) => (
                          <SidebarTabs
                               key={tab.id}
                               onClick={() => setMenu(tab.id)}
@@ -133,6 +140,7 @@ export default function Sidebar({ user }) {
                     ))}
                </div>
 
+               {/* Conditional rendering based on selected menu */}
                {menu === 1 ? (
                     <SidebarList title={"Chats"} data={chats} />
                ) : menu === 2 ? (
@@ -143,14 +151,16 @@ export default function Sidebar({ user }) {
                     <SidebarList title={"Search Result"} data={searchResults} />
                ) : null}
 
+               {/* Button to add a new room */}
                <div className="sidebar__chat--addRoom">
                     <IconButton onClick={() => setCreatingRoom(true)}>
                          <Add />
                     </IconButton>
                </div>
 
+               {/* Dialog for creating a new room */}
                <Dialog open={isCreatingRoom} onClose={() => setCreatingRoom(false)}>
-                    <DialogTitle>Subscribe</DialogTitle>
+                    <DialogTitle>Create a Room</DialogTitle>
                     <DialogContent>
                          <DialogContentText>
                               Type the name of your public room. Every user will be able to join
@@ -158,7 +168,7 @@ export default function Sidebar({ user }) {
                          </DialogContentText>
                          <TextField
                               autoFocus
-                              onChange={event => setRoomName(event.target.value)}
+                              onChange={(event) => setRoomName(event.target.value)}
                               value={roomName}
                               margin="dense"
                               id="roomName"
@@ -170,6 +180,7 @@ export default function Sidebar({ user }) {
                          />
                     </DialogContent>
                     <DialogActions>
+                         {/* Cancel and submit buttons for the room creation dialog */}
                          <Button color="error" onClick={() => setCreatingRoom(false)}>
                               Cancel
                          </Button>
